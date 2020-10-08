@@ -20,26 +20,15 @@ plot(time_data1,data_710,col='blue',type='l')
 
 
 data_710_new <- na.omit(data_710)
-num <- length(data_710_new)           #¿ÉÓÃÖµµÄÊýÁ¿
-data_710_mean <- mean(data_710_new)   #Êý¾ÝµÄÆ½¾ùÖµ
-print(data_710_mean)                  
-variance <- var(data_710_new)         #Êý¾ÝµÄ·½²î
-std <- sd(data_710_new)               #Êý¾ÝµÄ±ê×¼²î
+num <- length(data_710_new)           #å¯ç”¨å€¼çš„æ•°é‡a_710_mean <- mean(data_710_new)   #???Ýæ•°æ®çš„å¹³å‡å€¼nt(data_710_mean)                  
+variance <- var(data_710_new)         #???Ýæ•°æ®çš„æ–¹å·® <- sd(data_710_new)               #???Ýæ•°æ®çš„æ ‡å‡†å·®Z????æ£€éªŒest(x=data_710_new,alternative = 'two.sided',mu =data_710_mean ,sigma.x = std,conf.level = 0.95)
 
+#t????æ£€éªŒest(x=data_710_new,alternative = c('two.sided','less','greater'),mu = data_710_mean,sigma.x = std,conf.level = 0.95)
 
-#Z¼ìÑé
-z.test(x=data_710_new,alternative = 'two.sided',mu =data_710_mean ,sigma.x = std,conf.level = 0.95)
+#????å¨å°”ç§‘å…‹æ£®ç¬¦å·ç§©æ£€éªŒcox.test(x= data_710_new,mu=data_710_mean)
 
-#t¼ìÑé
-t.test(x=data_710_new,alternative = c('two.sided','less','greater'),mu = data_710_mean,sigma.x = std,conf.level = 0.95)
+#????å¡æ–¹æ£€éªŒsq.test(x=data_710_new)
 
-#Íþ¶û¿Æ¿ËÉ­·ûºÅÖÈ¼ìÑé
-wilcox.test(x= data_710_new,mu=data_710_mean)
-
-#¿¨·½¼ìÑé
-chisq.test(x=data_710_new)
-
-#Ïà¹ØÐÔ¼ìÑé
-cor.test(data_710_new,log(data_710_new),alternative = c('two.sided','less','greater'),conf.level = 0.95)
+#????ç›¸å…³æ€§æ£€éªŒ.test(data_710_new,log(data_710_new),alternative = c('two.sided','less','greater'),conf.level = 0.95)
 
 
