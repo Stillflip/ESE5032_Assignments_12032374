@@ -1,17 +1,3 @@
-jie_cheng <- function(n){
-  a <-1
-  if (n == 0){
-    return(a)
-  }
-  for(i in 1:n){
-    a <- a*i
-  }
-  return(a)
-}
-
-jie_cheng(4)
-
-jie_cheng(200)
 Pascal_triangle <- function(k){
   b=c()
   for (i in 1:k){
@@ -38,10 +24,6 @@ Pascal_triangle <- function(k){
 }
 
 
-Pascal_triangle(13)
+Pascal_triangle(100)
 Pascal_triangle(200)
 
-j=2
-for (s in 1:(j-1)){
-    print('n')
-}
