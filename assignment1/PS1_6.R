@@ -1,14 +1,18 @@
-data <- read.csv('2281305.csv')
-data_vis <- data$VIS
+data <- read.csv('2281305.csv')   #读取csv文件
+data_vis <- data$VIS              #提取csv文件中的VIS部分的数据
 print(data_vis)
 num=length(data_vis)
 print(num)
+
+#预先设置好变量
 distance <- list()
 dis_qua <- list()
 vari_code <- list()
 qua_vari_code <- list()
 del_label <-c()
 print(distance[29254])
+
+#将相应的数据放入已定义好的变量中
 for(i in 1:num){
   distance[i] <- as.numeric(substr(data_vis[i:i],1,6))
   dis_qua[i] <- substr(data_vis[i:i],8,8)
@@ -16,6 +20,8 @@ for(i in 1:num){
   qua_vari_code[i] <-substr(data_vis[i:i],12,12)
  
 }
+
+#进行条件判断，并删除无效数据
 print(distance[29254])
 for (j in 1:num){
   if (distance[j] <0 | distance[j]>160000 ){ 
@@ -29,12 +35,15 @@ for (t in 1:num){
     del_label= c(del_label,t)
   }
 }
-print(length(del_label))    
-data_vis3=data_vis[-del_label]   #获取到过滤后的数据
+print(length(del_label))  
+
+#获取到过滤后的数据
+data_vis3=data_vis[-del_label]   
 data_all_filter=data[-del_label]
 print(length(data_all_filter))
+
 #获取过滤后的可见性数据（距离）
-filter_dis <- list()
+filter_dis <- list()          
 filter_num=length(data_vis3)
 for (d in 1: filter_num ){
   filter_dis[d] <- as.numeric(substr(data_vis3[d:d],1,6))
@@ -42,12 +51,10 @@ for (d in 1: filter_num ){
 print(filter_dis)
 
 #获取时间
-
 Obs_Time = data_all_filter$DATE
 print(length(Obs_Time))
 Obs_Time <- Obs_Time[-del_label]
 print(length(Obs_Time))
-
 Obs_Time2=as.Date(Obs_Time)
 
 #绘图
@@ -229,7 +236,7 @@ legend("topright", regions, cex=1.3, fill=colors)
 dev.off()
 
 #各年度各级能见度数量，见"2010-2013堆叠条形图.png"，因2013年数据量太少因此不进行比较
-#visibility getting a little better
+# I think visibility gets a little better,not that clear.
 
 
 
