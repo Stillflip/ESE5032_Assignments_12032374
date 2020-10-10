@@ -1,29 +1,20 @@
-Pascal_triangle <- function(k){
-  b=c()
-  for (i in 1:k){
-    if(i-1==0){
-      b[i] <- 1
-      next
-    }else{
-      numer <- 1
-      deno <-1
-      n = k-1
-      value <-1
-      for (j in 1:(i-1)) {
-        numer <- numer*n
-        n <- n-1
-        deno <- deno*j
-        value <-(numer/deno)
+Pascal_triangle1 <- function(k){
+  cc <- matrix(0, nrow = k, ncol = k)
+  for (i in 1:k) {
+    cc[i,i] = 1
+    cc[i,1] = 1
+  }
+  if(k>=3){
+    for (j in 3:k) {
+      for (q in 2:(j-1)) {
+        cc[j,q] = cc[j-1,q-1] + cc[j-1,q]
         
       }
-      b[i] =value
+      
     }
   }
-  #b <-c(1,b)
-  return(b)
+  print(cc[k,])
 }
 
-
-Pascal_triangle(100)
-Pascal_triangle(200)
-
+Pascal_triangle1(100)
+Pascal_triangle1(200)

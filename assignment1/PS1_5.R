@@ -30,5 +30,5 @@ for(x in 1:100){
 }
 print(Total_solutions)
 
-barplot(Total_solutions,xlab = 'number',ylab = 'quantity',col = 'blue')
+plot(c(1:100),Total_solutions,main='Find_expression(x)',type='h',xlab = 'number',ylab = 'quantity',col = 'blue')
 
