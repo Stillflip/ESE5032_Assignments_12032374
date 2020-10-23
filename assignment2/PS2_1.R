@@ -56,7 +56,7 @@ CountEq_LargestEq <- function(country){
 
 CountEq_LargestEq('GREECE')
 
-country_all = unique(countr_all_desc$COUNTRY)
+country_all = unique(Sig_Eqs$COUNTRY)
 
 for(i in country_all){
   print(i)                     #print every country's name
