@@ -10,8 +10,8 @@ V2 <- c(11.10,11.22,11.29,11.49,11.32,11.40,11.71,11.60,11.78,12.05,10.61,
                      11.54,11.89,12.04,10.93,11.01,11.08,11.12,11.28,11.37,11.35,11.43,
                      11.50,11.57,11.92,11.95,12.01,12.25,12.30,12.39)
 
-rex_data <- cbind(Bone,V2)
-rex_data <- as_tibble(rex_data)
+rex_data <- cbind(Bone,V2)         #combine data
+rex_data <- as_tibble(rex_data)    # transform to tibble 
 means_bone<- rex_data %>%
   mutate(Bone_new = factor(Bone,ordered = TRUE))
 
@@ -19,9 +19,11 @@ glimpse(means_bone)
 
 bone1 <- means_bone %>%
   group_by(Bone_new) %>%
-  #mutate(meanes =mean(as.numeric(oxygen), na.rm = TRUE) )
-  summarise(mean_o=mean(as.numeric(V2)))
+  mutate(mean_o=mean(as.numeric(V2)))     #have the mean oxygen isotopic
   
-  
+# one-way anova 
+anova_bone <- aov(V2 ~ Bone_new, data = bone1)
+summary(anova_bone)
+TukeyHSD(anova_bone)  
   
   
