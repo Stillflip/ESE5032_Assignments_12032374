@@ -7,7 +7,7 @@ TEMP_tbl <- as_tibble(TEMP)
 x1_x2 <- TEMP_tbl %>%
   select(Time,X1,X2)%>%
   filter(X1!=-99999,X2!=-99999) %>%
-  mutate(year_month=substr(Time,1,7),year= substr(Time,1,4),month=substr(Time,6,7),day = )%>% 
+  mutate(year_month=substr(Time,1,7),year= substr(Time,1,4),month=substr(Time,6,7)cc)%>% 
   mutate(month_new= ifelse(substr(Time,7,7)!='/',month,paste(0,substr(month,1,1),sep = ''))) %>%
   mutate(year_month_new = paste(year,month_new,sep = ''))%>%
   group_by(year_month_new)%>%
@@ -40,7 +40,7 @@ hist(x1_x2_uni$X1_month_mean,
 box(lwd=2,col="green")
 
 #Scatterplots
-
+c
 X1_temp <- TEMP_tbl %>%
   select(Time,X1)%>%
   filter(X1 != -99999)
@@ -55,7 +55,52 @@ plot(X1 ~ as.Date(Time), data = X1_temp,
      cex = 2,
      col = "navy")
 
+
 # image plot
+ex.nc     <- open.nc("air.mon.ltm.nc")
+
+# Read the variables
+# Lat
+Lat       <- var.get.nc(ex.nc, "lat")
+# Lon
+Lon       <- var.get.nc(ex.nc, "lon")
+# Monthly long term mean, surface temperature [degC]
+Air_T     <- var.get.nc(ex.nc, "air") 
+
+# Close the NetCDF file
+close.nc(ex.nc)
+
+# Original Lat is in decreasing order, we need to reverse it
+Lat <- rev(Lat)
+
+# Data transformation of Air_T_Jan
+Air_T_Jan <- array(NA,dim=c(length(Lon), length(Lat)))
+for(row in 1:length(Lat)){
+  Air_T_Jan[,row] <- Air_T[, (length(Lat)+1-row),1 ]
+}
+
+par(mar=c(4.5,3,2,1))
+
+# Plot
+image.plot(Lon, Lat, Air_T_Jan,
+           horizontal=T, useRaster=T,
+           legend.shrink=0.75, axis.args=list(cex.axis = 1.25), 
+           legend.width=1, legend.mar=2,
+           legend.args=list(text="Surface Temperature [degC]",cex=1.25),           
+           xlab='',ylab='',midpoint=T, axes=F, ann=F
+)
+title(xlab="",cex.lab=1.25,font.lab=2)
+axis(1,at=pretty(Lon),tck=-0.015,lwd=2,cex.axis=1.25,font=1)
+title(ylab="",cex.lab=1.25,font.lab=2)
+axis(2,at=pretty(Lat),tck=-0.015,lwd=2,cex.axis=1.25,font=1,las=1)
+title(main=paste("Long term (1800-2020) mean surface temperature in Jan."),
+      cex.main=1,font.main=2)
+
+# Add map
+map('world',add=T,lwd=0.75,col="black")
+
+# Add a box
+box(lwd=2)
 
 
 
