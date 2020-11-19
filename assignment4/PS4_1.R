@@ -7,7 +7,7 @@ TEMP_tbl <- as_tibble(TEMP)
 x1_x2 <- TEMP_tbl %>%
   select(Time,X1,X2)%>%
   filter(X1!=-99999,X2!=-99999) %>%
-  mutate(year_month=substr(Time,1,7),year= substr(Time,1,4),month=substr(Time,6,7)cc)%>% 
+  mutate(year_month=substr(Time,1,7),year= substr(Time,1,4),month=substr(Time,6,7))%>% 
   mutate(month_new= ifelse(substr(Time,7,7)!='/',month,paste(0,substr(month,1,1),sep = ''))) %>%
   mutate(year_month_new = paste(year,month_new,sep = ''))%>%
   group_by(year_month_new)%>%
